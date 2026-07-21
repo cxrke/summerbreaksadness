@@ -1,136 +1,110 @@
 (() => {
-  const BASE = "AUD";
-
-  const REGION_CURRENCY = {
-    AU: "AUD",
-    NZ: "NZD",
-    US: "USD",
-    GB: "GBP",
-    CA: "CAD",
-    JP: "JPY",
-    KR: "KRW",
-    CN: "CNY",
-    HK: "HKD",
-    SG: "SGD",
-    IN: "INR",
-    CH: "CHF",
-    SE: "SEK",
-    NO: "NOK",
-    DK: "DKK",
-    PL: "PLN",
-    CZ: "CZK",
-    HU: "HUF",
-    RO: "RON",
-    TR: "TRY",
-    MX: "MXN",
-    BR: "BRL",
-    AR: "ARS",
-    CL: "CLP",
-    ZA: "ZAR",
-    AE: "AED",
-    SA: "SAR",
-    IL: "ILS",
-    TH: "THB",
-    MY: "MYR",
-    ID: "IDR",
-    PH: "PHP",
-    VN: "VND",
-    TW: "TWD",
-    AT: "EUR",
-    BE: "EUR",
-    CY: "EUR",
-    DE: "EUR",
-    EE: "EUR",
-    ES: "EUR",
-    FI: "EUR",
-    FR: "EUR",
-    GR: "EUR",
-    HR: "EUR",
-    IE: "EUR",
-    IT: "EUR",
-    LT: "EUR",
-    LU: "EUR",
-    LV: "EUR",
-    MT: "EUR",
-    NL: "EUR",
-    PT: "EUR",
-    SI: "EUR",
-    SK: "EUR",
+  const PRICES = {
+    hoodie: {
+      AUD: 120,
+      USD: 79,
+      NZD: 130,
+      GBP: 62,
+      EUR: 74,
+    },
+    polo: {
+      AUD: 85,
+      USD: 56,
+      NZD: 92,
+      GBP: 44,
+      EUR: 52,
+    },
   };
 
-  const getLocale = () =>
-    (navigator.languages && navigator.languages[0]) ||
-    navigator.language ||
-    "en-AU";
+  const SUPPORTED_CURRENCIES = ["AUD", "USD", "NZD", "GBP", "EUR"];
+  const EURO_REGIONS = new Set([
+    "AT",
+    "BE",
+    "CY",
+    "DE",
+    "EE",
+    "ES",
+    "FI",
+    "FR",
+    "GR",
+    "HR",
+    "IE",
+    "IT",
+    "LT",
+    "LU",
+    "LV",
+    "MT",
+    "NL",
+    "PT",
+    "SI",
+    "SK",
+  ]);
 
-  const getRegion = (locale) => {
+  const getSuggestedCurrency = () => {
     try {
+      const locale =
+        (navigator.languages && navigator.languages[0]) ||
+        navigator.language ||
+        "en-AU";
       const region = new Intl.Locale(locale).maximize().region;
-      if (region) return region;
-    } catch (_) {}
-    const parts = String(locale).split(/[-_]/);
-    return (parts[1] || parts[0] || "AU").toUpperCase();
+      if (region === "AU") return "AUD";
+      if (region === "NZ") return "NZD";
+      if (region === "GB") return "GBP";
+      if (EURO_REGIONS.has(region)) return "EUR";
+    } catch (_) {
+      // Use USD when the browser does not expose a valid locale.
+    }
+    return "USD";
   };
 
-  const getCurrency = (region) => REGION_CURRENCY[region] || "USD";
-
-  const formatMoney = (amount, currency, locale) => {
-    const zeroDecimal = ["JPY", "KRW", "VND", "CLP", "IDR"].includes(currency);
-    return new Intl.NumberFormat(locale, {
+  const formatMoney = (amount, currency) =>
+    new Intl.NumberFormat(undefined, {
       style: "currency",
       currency,
       currencyDisplay: "narrowSymbol",
-      maximumFractionDigits: zeroDecimal ? 0 : 2,
-      minimumFractionDigits: zeroDecimal ? 0 : 2,
+      maximumFractionDigits: 0,
     }).format(amount);
-  };
 
-  const fetchRate = async (currency) => {
-    if (currency === BASE) return 1;
-    const res = await fetch(
-      `https://api.frankfurter.app/latest?from=${BASE}&to=${currency}`
-    );
-    if (!res.ok) throw new Error("rate fetch failed");
-    const data = await res.json();
-    return data.rates[currency];
-  };
-
-  const paint = (nodes, text) => {
-    nodes.forEach((el) => {
-      el.textContent = text;
-    });
-  };
-
-  const run = async () => {
-    const nodes = document.querySelectorAll("[data-price-aud]");
-    if (!nodes.length) return;
-
-    const locale = getLocale();
-    const region = getRegion(locale);
-    const currency = getCurrency(region);
-
-    // Show AUD immediately so nothing flashes empty
-    nodes.forEach((el) => {
-      const aud = Number(el.dataset.priceAud);
-      if (!Number.isFinite(aud)) return;
-      el.textContent = formatMoney(aud, BASE, "en-AU");
-    });
-
+  const getSavedCurrency = () => {
     try {
-      const rate = await fetchRate(currency);
-      nodes.forEach((el) => {
-        const aud = Number(el.dataset.priceAud);
-        if (!Number.isFinite(aud)) return;
-        el.textContent = formatMoney(aud * rate, currency, locale);
-      });
+      return localStorage.getItem("currency");
     } catch (_) {
-      nodes.forEach((el) => {
-        const aud = Number(el.dataset.priceAud);
-        if (!Number.isFinite(aud)) return;
-        el.textContent = formatMoney(aud, BASE, "en-AU");
-      });
+      return null;
     }
   };
 
-  run();
+  const saveCurrency = (currency) => {
+    try {
+      localStorage.setItem("currency", currency);
+    } catch (_) {
+      // The selection still works for this page if storage is unavailable.
+    }
+  };
+
+  const displayPrices = (currency) => {
+    document.querySelectorAll("[data-product]").forEach((element) => {
+      const product = PRICES[element.dataset.product];
+      const amount = product && product[currency];
+      if (typeof amount !== "number") return;
+      element.textContent = formatMoney(amount, currency);
+    });
+  };
+
+  const selector = document.querySelector(".currency-selector");
+  if (!selector) return;
+
+  const savedCurrency = getSavedCurrency();
+  const currency = SUPPORTED_CURRENCIES.includes(savedCurrency)
+    ? savedCurrency
+    : getSuggestedCurrency();
+
+  selector.value = currency;
+  displayPrices(currency);
+
+  selector.addEventListener("change", () => {
+    const selectedCurrency = selector.value;
+    if (!SUPPORTED_CURRENCIES.includes(selectedCurrency)) return;
+    saveCurrency(selectedCurrency);
+    displayPrices(selectedCurrency);
+  });
 })();

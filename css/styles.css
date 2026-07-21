@@ -362,8 +362,11 @@ img {
 
   .cart-message {
     right: 0.75rem;
+    top: calc(50% + 1.2rem);
     white-space: normal;
-    max-width: 9.5rem;
+    max-width: 5.75rem;
+    font-size: 11px;
+    line-height: 1.15;
     text-align: right;
   }
 
@@ -389,6 +392,15 @@ img {
 
   .product-card {
     padding: 0;
+  }
+
+  .product-card--polo .product-card__name {
+    margin-top: 1.6rem;
+  }
+
+  .product-card__name,
+  .product-card__price {
+    letter-spacing: 0em;
   }
 
   .product-card__image img {

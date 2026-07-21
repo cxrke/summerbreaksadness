@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kimi polo shirt — Summer Break Sadness</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="back-link" href="index.html" aria-label="Back to home">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M15 4L7 12l8 8"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="square"
+            stroke-linejoin="miter"
+          />
+        </svg>
+      </a>
+      <a class="logo-link" href="index.html" aria-label="Home">
+        <span class="logo" aria-hidden="true">
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+        </span>
+      </a>
+      <button class="cart-link" type="button" aria-label="Racing cart">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M4 6h2l1.2 9.5a1 1 0 0 0 1 .85h8.6a1 1 0 0 0 1-.8L19 8H7"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="square"
+            stroke-linejoin="miter"
+          />
+          <circle cx="10" cy="20" r="1.15" fill="currentColor" />
+          <circle cx="16.5" cy="20" r="1.15" fill="currentColor" />
+        </svg>
+      </button>
+      <p class="cart-message" aria-live="polite">Your racing cart is empty</p>
+    </header>
+
+    <main class="product-page">
+      <div class="product-layout">
+        <div class="product-media">
+          <img src="assets/polo.png" alt="Kimi polo shirt" />
+        </div>
+
+        <div class="product-info">
+          <h1>Kimi polo shirt</h1>
+          <p class="product-price" data-price-aud="85"></p>
+
+          <p class="size-label">Select size</p>
+          <div class="size-row" role="group" aria-label="Sizes">
+            <button class="size-btn is-sold" type="button" data-size="S">S</button>
+            <button class="size-btn is-sold" type="button" data-size="M">M</button>
+            <button class="size-btn is-sold" type="button" data-size="L">L</button>
+            <button class="size-btn is-sold" type="button" data-size="XL">XL</button>
+            <button class="size-btn is-sold" type="button" data-size="XXL">XXL</button>
+            <span class="fabric">100% cotton</span>
+          </div>
+
+          <p class="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/logo.js"></script>
+    <script src="js/price.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/product.js"></script>
+  </body>
+</html>

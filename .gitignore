@@ -1,0 +1,9 @@
+.venv/
+.u2net/
+.DS_Store
+*.log
+.vercel/
+
+# Source / working images (site uses assets/)
+IMG_*.PNG
+Untitled*.PNG

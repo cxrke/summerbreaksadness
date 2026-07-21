@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summer Break Sadness</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo-link" href="index.html" aria-label="Home">
+        <span class="logo" aria-hidden="true">
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+        </span>
+      </a>
+      <button class="cart-link" type="button" aria-label="Racing cart">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M4 6h2l1.2 9.5a1 1 0 0 0 1 .85h8.6a1 1 0 0 0 1-.8L19 8H7"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="square"
+            stroke-linejoin="miter"
+          />
+          <circle cx="10" cy="20" r="1.15" fill="currentColor" />
+          <circle cx="16.5" cy="20" r="1.15" fill="currentColor" />
+        </svg>
+      </button>
+      <p class="cart-message" aria-live="polite">Your racing cart is empty</p>
+    </header>
+
+    <main class="home-main">
+      <div class="product-grid">
+        <a class="product-card" href="hoodie.html">
+          <div class="product-card__image">
+            <img
+              src="assets/home-hoodie.png"
+              alt="Super max zip hoodie"
+              loading="eager"
+            />
+          </div>
+          <span class="product-card__name">Super max zip hoodie</span>
+          <span class="product-card__price" data-price-aud="120"></span>
+        </a>
+
+        <a class="product-card product-card--polo" href="polo.html">
+          <div class="product-card__image">
+            <img src="assets/home-polo.png" alt="Kimi polo shirt" loading="eager" />
+          </div>
+          <span class="product-card__name">Kimi polo shirt</span>
+          <span class="product-card__price" data-price-aud="85"></span>
+        </a>
+      </div>
+    </main>
+
+    <script src="js/logo.js"></script>
+    <script src="js/price.js"></script>
+    <script src="js/cart.js"></script>
+  </body>
+</html>

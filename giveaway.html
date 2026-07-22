@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Podium Challenge — Summer Break Sadness</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="back-link" href="index.html" aria-label="Back to home">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M15 4L7 12l8 8"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="square"
+            stroke-linejoin="miter"
+          />
+        </svg>
+      </a>
+      <a class="logo-link" href="index.html" aria-label="Home">
+        <span class="logo" aria-hidden="true">
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+          <span class="logo__tile"><span class="logo__light"></span></span>
+        </span>
+      </a>
+      <select class="currency-selector" aria-label="Currency">
+        <option value="AUD">AUD</option>
+        <option value="USD">USD</option>
+        <option value="NZD">NZD</option>
+        <option value="GBP">GBP</option>
+        <option value="EUR">EUR</option>
+      </select>
+      <button class="cart-link" type="button" aria-label="Racing cart">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M4 6h2l1.2 9.5a1 1 0 0 0 1 .85h8.6a1 1 0 0 0 1-.8L19 8H7"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="square"
+            stroke-linejoin="miter"
+          />
+          <circle cx="10" cy="20" r="1.15" fill="currentColor" />
+          <circle cx="16.5" cy="20" r="1.15" fill="currentColor" />
+        </svg>
+      </button>
+      <p class="cart-message" aria-live="polite">Your racing cart is empty</p>
+    </header>
+
+    <main class="giveaway-page">
+      <div class="giveaway-intro">
+        <p class="giveaway-kicker">HUNGARY GP</p>
+        <h1>Predict the Podium</h1>
+        <p>
+          Correctly predict the first three finishers in order for your chance
+          to win any clothing item of your choice.
+        </p>
+      </div>
+
+      <form
+        class="giveaway-form"
+        action="https://formspree.io/f/mzdnaznb"
+        method="POST"
+        novalidate
+      >
+        <input type="hidden" name="_subject" value="New Hungary GP podium challenge entry" />
+        <input type="hidden" name="race" value="Hungary GP" />
+
+        <div class="giveaway-field">
+          <label for="first-place">1st place</label>
+          <input
+            id="first-place"
+            name="first_place"
+            type="text"
+            placeholder="Driver name"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="giveaway-field">
+          <label for="second-place">2nd place</label>
+          <input
+            id="second-place"
+            name="second_place"
+            type="text"
+            placeholder="Driver name"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="giveaway-field">
+          <label for="third-place">3rd place</label>
+          <input
+            id="third-place"
+            name="third_place"
+            type="text"
+            placeholder="Driver name"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="giveaway-field giveaway-field--contact">
+          <label for="contact">Instagram handle</label>
+          <input
+            id="contact"
+            name="contact"
+            type="text"
+            placeholder="@handle"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="giveaway-honeypot" aria-hidden="true">
+          <label for="company">Company</label>
+          <input id="company" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <label class="giveaway-consent">
+          <input name="entry_terms_accepted" type="checkbox" value="yes" required />
+          <span>I agree to be contacted regarding my entry.</span>
+        </label>
+
+        <p class="giveaway-rules">
+          One entry per person. You must be following Summer Break Sadness on
+          Instagram when the winner is confirmed. Entries close when the first
+          practice session starts.
+        </p>
+        <button class="giveaway-submit" type="submit">SUBMIT ENTRY</button>
+        <p class="giveaway-status" role="status" aria-live="polite"></p>
+      </form>
+    </main>
+
+    <script src="js/logo.js"></script>
+    <script src="js/price.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/giveaway.js"></script>
+  </body>
+</html>

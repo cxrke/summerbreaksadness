@@ -1,24 +1,31 @@
 (() => {
   const logos = document.querySelectorAll(".logo");
+  const frames = Array.from(
+    { length: 6 },
+    (_, index) => `assets/logo-frames/${index}.png`
+  );
 
-  logos.forEach((logo) => {
-    const lights = logo.querySelectorAll(".logo__light");
-    if (lights.length !== 5) return;
+  logos.forEach(async (logo) => {
+    const frameImages = frames.map((src, index) => {
+      const image = new Image();
+      image.className = "logo__frame";
+      image.alt = "";
+      image.src = src;
+      image.classList.toggle("is-active", index === 0);
+      return image;
+    });
 
-    let lit = 0;
+    await Promise.all(
+      frameImages.map((image) =>
+        image.decode ? image.decode().catch(() => {}) : Promise.resolve()
+      )
+    );
+
+    logo.replaceChildren(...frameImages);
+    logo.style.backgroundImage = "none";
+
+    let frame = 0;
     let timer = null;
-
-    const clearLights = () => {
-      lit = 0;
-      lights.forEach((light) => light.classList.remove("is-on"));
-    };
-
-    const lightNext = () => {
-      if (lit < lights.length) {
-        lights[lit].classList.add("is-on");
-        lit += 1;
-      }
-    };
 
     const holdFull = () => 0.5 + Math.random() * 2.1; // 0.5s – 2.6s
 
@@ -26,22 +33,26 @@
       timer = window.setTimeout(fn, seconds * 1000);
     };
 
+    const showFrame = (index) => {
+      frame = index;
+      frameImages.forEach((image, imageIndex) => {
+        image.classList.toggle("is-active", imageIndex === frame);
+      });
+    };
+
     const runCycle = () => {
-      clearLights();
-      schedule(() => {
-        lightNext();
-        const step = () => {
-          if (lit < lights.length) {
-            schedule(() => {
-              lightNext();
-              step();
-            }, 1);
-          } else {
-            schedule(runCycle, holdFull());
-          }
-        };
-        step();
-      }, 1);
+      showFrame(0);
+      const step = () => {
+        if (frame < frames.length - 1) {
+          schedule(() => {
+            showFrame(frame + 1);
+            step();
+          }, 1);
+        } else {
+          schedule(runCycle, holdFull());
+        }
+      };
+      step();
     };
 
     runCycle();

@@ -75,6 +75,23 @@ img {
   display: block;
 }
 
+.giveaway-link {
+  position: absolute;
+  left: 3.75rem;
+  top: 50%;
+  transform: translateY(calc(-50% + 1px));
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.giveaway-link:hover,
+.giveaway-link:focus-visible,
+.giveaway-link[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
 .currency-selector {
   position: absolute;
   right: 3.75rem;
@@ -148,33 +165,28 @@ img {
 
 .logo {
   --logo-h: 84px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 3px;
+  display: block;
+  position: relative;
   width: calc(var(--logo-h) * 1.85);
   height: var(--logo-h);
+  background: url("../assets/logo-frames/0.png") center / contain no-repeat;
 }
 
-.logo__tile {
-  position: relative;
-  background: #000;
-  overflow: hidden;
-}
-
-.logo__light {
+.logo__frame {
   position: absolute;
-  left: 50%;
-  bottom: 14%;
-  width: 62%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #ff0000;
-  transform: translateX(-50%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   opacity: 0;
 }
 
-.logo__light.is-on {
+.logo__frame.is-active {
   opacity: 1;
+}
+
+.logo__tile {
+  display: none;
 }
 
 .home-main {
@@ -222,7 +234,7 @@ img {
   font-weight: 500;
   letter-spacing: 0.01em;
   line-height: 1.05;
-  margin-top: 0.7rem;
+  margin-top: 0.1rem;
 }
 
 .product-card__price,
@@ -360,13 +372,159 @@ img {
   color: var(--text);
 }
 
+.giveaway-page {
+  width: min(500px, 100%);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+}
+
+.giveaway-intro {
+  margin-bottom: 2.5rem;
+}
+
+.giveaway-kicker {
+  margin-bottom: 0.65rem;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.giveaway-intro h1 {
+  margin-bottom: 0.7rem;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.giveaway-intro > p:last-child {
+  max-width: 25rem;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.giveaway-form {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.giveaway-field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.giveaway-field--contact {
+  margin-top: 0.65rem;
+}
+
+.giveaway-field label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.giveaway-field input {
+  width: 100%;
+  padding: 0.7rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--text);
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+}
+
+.giveaway-field input::placeholder {
+  color: var(--sold);
+  opacity: 1;
+}
+
+.giveaway-field input:focus {
+  border-bottom-width: 2px;
+  padding-bottom: calc(0.7rem - 1px);
+}
+
+.giveaway-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 12px;
+  line-height: 1.25;
+  cursor: pointer;
+}
+
+.giveaway-consent input {
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-top: 0.05rem;
+  accent-color: var(--text);
+}
+
+.giveaway-rules {
+  margin-top: -0.6rem;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.giveaway-submit {
+  width: 100%;
+  min-height: 2.8rem;
+  border: 1px solid var(--text);
+  border-radius: 0;
+  background: var(--text);
+  color: var(--bg);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.giveaway-submit:hover,
+.giveaway-submit:focus-visible {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.giveaway-submit:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.giveaway-status {
+  min-height: 1rem;
+  font-size: 12px;
+}
+
+.giveaway-status.is-success {
+  color: var(--text);
+}
+
+.giveaway-status.is-error {
+  color: #a00000;
+}
+
+.giveaway-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 @media (min-width: 761px) {
   .product-card--polo {
     margin-top: 7.25rem;
   }
 
   .product-card--polo .product-card__name {
-    margin-top: 1.7rem;
+    margin-top: -1.75rem;
+  }
+
+  .product-media--hoodie {
+    margin-top: -1.25rem;
+  }
+
+  .product-media--polo {
+    margin-top: -3.25rem;
   }
 }
 
@@ -379,16 +537,30 @@ img {
     left: 0.75rem;
   }
 
+  .giveaway-link {
+    left: 3rem;
+    width: 3.25rem;
+    transform: translateY(calc(-50% + 3px));
+    line-height: 1.05;
+    text-align: center;
+  }
+
+  .giveaway-link:hover,
+  .giveaway-link:focus-visible,
+  .giveaway-link[aria-current="page"] {
+    text-decoration: none;
+  }
+
   .cart-link {
-    right: 0.75rem;
+    right: 2.75rem;
   }
 
   .currency-selector {
-    right: 3rem;
+    right: 5rem;
   }
 
   .cart-message {
-    right: 0.75rem;
+    right: 2.75rem;
     top: calc(50% + 1.2rem);
     white-space: normal;
     max-width: 5.75rem;
@@ -409,6 +581,10 @@ img {
     padding: 1.25rem 1rem 3.5rem;
   }
 
+  .giveaway-page {
+    padding: 1.75rem 1.25rem 4rem;
+  }
+
   .product-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -422,7 +598,7 @@ img {
   }
 
   .product-card--polo .product-card__name {
-    margin-top: 1.6rem;
+    margin-top: -1.75rem;
   }
 
   .product-card__name,
@@ -468,6 +644,7 @@ img {
 
   .fabric {
     width: 100%;
-    margin-top: 0.25rem;
+    margin-top: 1.1rem;
+    color: var(--text);
   }
 }

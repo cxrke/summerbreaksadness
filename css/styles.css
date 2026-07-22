@@ -76,6 +76,7 @@ img {
 }
 
 .giveaway-link {
+  display: none;
   position: absolute;
   left: 3.75rem;
   top: 50%;

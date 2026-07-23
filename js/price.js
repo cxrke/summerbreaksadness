@@ -1,18 +1,18 @@
 (() => {
   const PRICES = {
     hoodie: {
-      AUD: 120,
-      USD: 79,
-      NZD: 130,
-      GBP: 62,
-      EUR: 74,
+      AUD: 90,
+      USD: 59,
+      NZD: 98,
+      GBP: 47,
+      EUR: 56,
     },
     polo: {
-      AUD: 85,
-      USD: 56,
-      NZD: 92,
-      GBP: 44,
-      EUR: 52,
+      AUD: 65,
+      USD: 43,
+      NZD: 70,
+      GBP: 34,
+      EUR: 40,
     },
   };
 

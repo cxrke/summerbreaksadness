@@ -57,12 +57,15 @@
 
     runCycle();
 
-    window.addEventListener(
-      "pagehide",
-      () => {
-        if (timer) window.clearTimeout(timer);
-      },
-      { once: true }
-    );
+    window.addEventListener("pagehide", () => {
+      if (timer) {
+        window.clearTimeout(timer);
+        timer = null;
+      }
+    });
+
+    window.addEventListener("pageshow", (event) => {
+      if (event.persisted && !timer) runCycle();
+    });
   });
 })();

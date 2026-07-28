@@ -73,6 +73,34 @@
           </div>
 
           <p class="status" aria-live="polite"></p>
+          <form
+            class="stock-form"
+            action="https://formspree.io/f/mgogdkqv"
+            method="POST"
+            novalidate
+          >
+            <input type="hidden" name="_subject" value="Back in stock request — Kimi polo shirt" />
+            <input type="hidden" name="product" value="Kimi polo shirt" />
+            <input class="stock-size" type="hidden" name="size" value="" />
+            <div class="stock-honeypot" aria-hidden="true">
+              <label for="polo-company">Company</label>
+              <input id="polo-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+            <label for="polo-stock-email">Get an email when your size is back in stock</label>
+            <div class="stock-form__row">
+              <input
+                id="polo-stock-email"
+                name="email"
+                type="email"
+                placeholder="Email address"
+                autocomplete="email"
+                required
+              />
+              <button type="submit">Remind me</button>
+            </div>
+            <p class="stock-form__note">Select a size, then enter your email.</p>
+            <p class="stock-form__status" role="status" aria-live="polite"></p>
+          </form>
         </div>
       </div>
     </main>

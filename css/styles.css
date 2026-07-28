@@ -361,6 +361,84 @@ img {
   white-space: nowrap;
 }
 
+.size-chart {
+  margin-top: 1.75rem;
+}
+
+.size-chart summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  list-style: none;
+}
+
+.size-chart summary::-webkit-details-marker {
+  display: none;
+}
+
+.size-chart summary::after {
+  content: "+";
+  margin-left: auto;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.size-chart[open] summary::after {
+  content: "−";
+}
+
+.size-chart summary span {
+  margin-left: 0.3rem;
+  margin-right: auto;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.size-chart__scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.size-chart[open] .size-chart__scroll {
+  margin-top: 0.25rem;
+}
+
+.size-chart table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  line-height: 1.15;
+  text-align: left;
+}
+
+.size-chart th,
+.size-chart td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.size-chart th:first-child,
+.size-chart td:first-child {
+  padding-left: 0;
+}
+
+.size-chart thead th {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.size-chart tbody th {
+  font-weight: 500;
+}
+
 .status {
   min-height: 1.25rem;
   margin-top: 1.25rem;
@@ -371,6 +449,96 @@ img {
 
 .status.is-visible {
   color: var(--text);
+}
+
+.stock-form {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.stock-form > label {
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.stock-form__row {
+  display: flex;
+}
+
+.stock-form__row input {
+  min-width: 0;
+  flex: 1;
+  height: 2.8rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--text);
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+
+.stock-form__row input:focus {
+  box-shadow: inset 0 0 0 1px var(--text);
+}
+
+.stock-form__row input::placeholder {
+  color: var(--sold);
+  opacity: 1;
+}
+
+.stock-form__row button {
+  min-width: 6.5rem;
+  height: 2.8rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--text);
+  border-left: 0;
+  border-radius: 0;
+  background: var(--text);
+  color: var(--bg);
+  font: inherit;
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.stock-form__row button:hover,
+.stock-form__row button:focus-visible {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.stock-form__row button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.stock-form__note,
+.stock-form__status {
+  min-height: 0.8rem;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.stock-form__status.is-success {
+  color: var(--text);
+}
+
+.stock-form__status.is-error {
+  color: #a00000;
+}
+
+.stock-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .giveaway-page {

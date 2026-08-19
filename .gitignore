@@ -3,6 +3,7 @@
 .DS_Store
 *.log
 .vercel/
+.shopify/
 
 # Source / working images (site uses assets/)
 IMG_*.PNG

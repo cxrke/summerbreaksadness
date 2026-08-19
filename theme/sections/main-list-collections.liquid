@@ -1,0 +1,18 @@
+<main class="home-main">
+  <div class="product-grid">
+    {%- for collection in collections -%}
+      {%- unless collection.handle == 'frontpage' -%}
+        <a class="product-card" href="{{ collection.url }}">
+          <span class="product-card__name">{{ collection.title }}</span>
+        </a>
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+</main>
+
+{% schema %}
+{
+  "name": "Collections",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,196 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- if product.handle == 'super-max-zip-hoodie' and product.selected_variant == blank -%}
+  {%- for variant in product.variants -%}
+    {%- if variant.option1 == 'S' or variant.title == 'S' -%}
+      {%- assign current_variant = variant -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- assign media_class = 'product-media' -%}
+{%- if product.handle == 'super-max-zip-hoodie' -%}
+  {%- assign media_class = 'product-media product-media--hoodie' -%}
+{%- elsif product.handle == 'kimi-polo-shirt' -%}
+  {%- assign media_class = 'product-media product-media--polo' -%}
+{%- endif -%}
+
+<main class="product-page">
+  <div class="product-layout">
+    <div class="{{ media_class }}">
+      {%- if product.images.size > 0 -%}
+        <div
+          class="product-gallery{% if product.images.size > 1 %} product-gallery--multi{% endif %}"
+          tabindex="0"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="{{ product.title | escape }} photos"
+        >
+          {%- for image in product.images -%}
+            <div class="product-gallery__slide">
+              <img
+                src="{{ image | image_url: width: 2000 }}"
+                alt="{{ image.alt | default: product.title | escape }}"
+                width="{{ image.width }}"
+                height="{{ image.height }}"
+                {% unless forloop.first %}loading="lazy"{% endunless %}
+                draggable="false"
+              >
+            </div>
+          {%- endfor -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery__dots" role="tablist" aria-label="Product photos">
+            {%- for image in product.images -%}
+              <button
+                class="product-gallery__dot{% if forloop.first %} is-active{% endif %}"
+                type="button"
+                role="tab"
+                aria-label="Photo {{ forloop.index }} of {{ product.images.size }}"
+                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                data-index="{{ forloop.index0 }}"
+              ></button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      {%- elsif product.handle == 'super-max-zip-hoodie' -%}
+        <img src="{{ 'hoodie.png' | asset_url }}" alt="{{ product.title | escape }}">
+      {%- elsif product.handle == 'kimi-polo-shirt' -%}
+        <img src="{{ 'polo.png' | asset_url }}" alt="{{ product.title | escape }}">
+      {%- endif -%}
+    </div>
+
+    <div class="product-info">
+      <h1>{{ product.title }}</h1>
+      <p class="product-price">{% render 'format-price', price: current_variant.price %}</p>
+
+      {% form 'product', product, class: 'product-form' %}
+        <input type="hidden" name="id" value="{{ current_variant.id }}" class="variant-id">
+
+        <div class="size-row" role="group" aria-label="Sizes">
+          {%- for variant in product.variants -%}
+            <button
+              class="size-btn{% if product.handle == 'super-max-zip-hoodie' and variant.id == current_variant.id %} is-selected{% endif %}{% unless variant.available %} is-sold{% endunless %}"
+              type="button"
+              data-size="{{ variant.title | escape }}"
+              data-variant-id="{{ variant.id }}"
+              data-available="{{ variant.available }}"
+            >
+              {{ variant.title }}
+            </button>
+          {%- endfor -%}
+          <span class="fabric">
+            {{ product.metafields.custom.fabric | default: '100% cotton' }}
+            <span class="fit">{{ 'product.fit' | t }}</span>
+          </span>
+        </div>
+
+        <p class="status" aria-live="polite"></p>
+        <button class="add-to-cart" type="submit"{% unless product.handle == 'super-max-zip-hoodie' and current_variant.available %} hidden{% endunless %}>
+          {{ 'product.add_to_cart' | t }}
+        </button>
+      {% endform %}
+
+      {%- assign show_restock_form = false -%}
+      {%- assign all_sold_out = true -%}
+      {%- for variant in product.variants -%}
+        {%- if variant.available -%}
+          {%- assign all_sold_out = false -%}
+        {%- endif -%}
+        {%- unless variant.available -%}
+          {%- assign show_restock_form = true -%}
+        {%- endunless -%}
+      {%- endfor -%}
+
+      {%- if show_restock_form -%}
+        <form
+          class="stock-form"
+          action="{{ section.settings.restock_form_action }}"
+          method="POST"
+          novalidate
+          {% unless all_sold_out %}hidden{% endunless %}
+        >
+          <input type="hidden" name="_subject" value="Back in stock request — {{ product.title }}">
+          <input type="hidden" name="product" value="{{ product.title }}">
+          <input class="stock-size" type="hidden" name="size" value="">
+          <div class="stock-honeypot" aria-hidden="true">
+            <label for="stock-company">Company</label>
+            <input id="stock-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <label for="stock-email">{{ 'product.restock_label' | t }}</label>
+          <div class="stock-form__row">
+            <input
+              id="stock-email"
+              name="email"
+              type="email"
+              placeholder="{{ 'product.restock_placeholder' | t }}"
+              autocomplete="email"
+              required
+            >
+            <button type="submit">{{ 'product.restock_submit' | t }}</button>
+          </div>
+          <p class="stock-form__note">{{ 'product.restock_note' | t }}</p>
+          <p class="stock-form__status" role="status" aria-live="polite"></p>
+        </form>
+      {%- endif -%}
+
+      {%- if product.handle == 'super-max-zip-hoodie' or product.handle == 'kimi-polo-shirt' -%}
+        <details class="size-chart">
+          <summary>{{ 'product.size_chart' | t }} <span>{{ 'product.size_chart_unit' | t }}</span></summary>
+          <div class="size-chart__scroll">
+            {%- if product.handle == 'super-max-zip-hoodie' -%}
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Size</th>
+                    <th scope="col">Body length</th>
+                    <th scope="col">Pit-to-pit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">S</th><td>62</td><td>57</td></tr>
+                  <tr><th scope="row">M</th><td>64</td><td>59.5</td></tr>
+                  <tr><th scope="row">L</th><td>66</td><td>62</td></tr>
+                  <tr><th scope="row">XL</th><td>68</td><td>64.5</td></tr>
+                </tbody>
+              </table>
+            {%- else -%}
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Size</th>
+                    <th scope="col">Pit-to-pit</th>
+                    <th scope="col">Front length</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">S</th><td>44</td><td>58</td></tr>
+                  <tr><th scope="row">M</th><td>46</td><td>59</td></tr>
+                  <tr><th scope="row">L</th><td>48</td><td>60</td></tr>
+                  <tr><th scope="row">XL</th><td>50</td><td>61</td></tr>
+                </tbody>
+              </table>
+            {%- endif -%}
+          </div>
+        </details>
+      {%- elsif product.description != blank -%}
+        <div class="product-description">{{ product.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</main>
+
+<script src="{{ 'product.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "restock_form_action",
+      "label": "Restock form URL",
+      "default": "https://formspree.io/f/mgogdkqv"
+    }
+  ]
+}
+{% endschema %}

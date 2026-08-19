@@ -5,21 +5,35 @@
 
   if (!buttons.length || !status) return;
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("is-selected"));
-      button.classList.add("is-selected");
-      status.textContent = `${button.dataset.size} — sold out`;
-      status.classList.add("is-visible");
+  const selectSize = (button) => {
+    buttons.forEach((b) => b.classList.remove("is-selected"));
+    button.classList.add("is-selected");
 
-      if (form) {
-        form.querySelector(".stock-size").value = button.dataset.size;
-        form.querySelector(".stock-form__note").textContent =
-          `We'll email you when size ${button.dataset.size} is back.`;
-        form.querySelector(".stock-form__status").textContent = "";
-      }
-    });
+    if (!button.classList.contains("is-sold")) {
+      status.textContent = "";
+      status.classList.remove("is-visible");
+      if (form) form.hidden = true;
+      return;
+    }
+
+    status.textContent = `${button.dataset.size} — sold out`;
+    status.classList.add("is-visible");
+
+    if (form) {
+      form.hidden = false;
+      form.querySelector(".stock-size").value = button.dataset.size;
+      form.querySelector(".stock-form__note").textContent =
+        `We'll email you when size ${button.dataset.size} is back.`;
+      form.querySelector(".stock-form__status").textContent = "";
+    }
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => selectSize(button));
   });
+
+  const preselected = document.querySelector(".size-btn.is-selected");
+  if (preselected) selectSize(preselected);
 
   if (!form) return;
 

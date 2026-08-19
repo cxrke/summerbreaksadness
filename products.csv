@@ -1,0 +1,9 @@
+Handle,Title,Vendor,Published,Option1 Name,Option1 Value,Variant Inventory Tracker,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Requires Shipping,Variant Taxable,Image Src,Image Position,Image Alt Text,Status
+super-max-zip-hoodie,Super max zip hoodie,Summer Break Sadness,TRUE,Size,S,shopify,0,deny,manual,90.00,TRUE,TRUE,https://f1spu6-w8.myshopify.com/cdn/shop/t/2/assets/hoodie.png,1,Super max zip hoodie,active
+super-max-zip-hoodie,,,,,M,shopify,0,deny,manual,90.00,TRUE,TRUE,,,,
+super-max-zip-hoodie,,,,,L,shopify,0,deny,manual,90.00,TRUE,TRUE,,,,
+super-max-zip-hoodie,,,,,XL,shopify,0,deny,manual,90.00,TRUE,TRUE,,,,
+kimi-polo-shirt,Kimi polo shirt,Summer Break Sadness,TRUE,Size,S,shopify,0,deny,manual,65.00,TRUE,TRUE,https://f1spu6-w8.myshopify.com/cdn/shop/t/2/assets/polo.png,1,Kimi polo shirt,active
+kimi-polo-shirt,,,,,M,shopify,0,deny,manual,65.00,TRUE,TRUE,,,,
+kimi-polo-shirt,,,,,L,shopify,0,deny,manual,65.00,TRUE,TRUE,,,,
+kimi-polo-shirt,,,,,XL,shopify,0,deny,manual,65.00,TRUE,TRUE,,,,

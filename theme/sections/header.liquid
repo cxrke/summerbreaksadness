@@ -1,0 +1,29 @@
+<header class="site-header">
+  {%- unless template.name == 'index' -%}
+    <a class="back-link" href="{{ routes.root_url }}" aria-label="{{ 'general.back' | t }}">
+      {% render 'icon-back' %}
+    </a>
+  {%- endunless -%}
+
+  <a class="logo-link" href="{{ routes.root_url }}" aria-label="{{ 'general.home' | t }}">
+    {% render 'logo' %}
+  </a>
+
+  <a
+    class="cart-link"
+    href="{{ routes.cart_url }}"
+    aria-label="{% if cart.item_count > 0 %}{{ 'general.cart' | t }} ({{ cart.item_count }}){% else %}{{ 'general.cart' | t }}{% endif %}"
+    data-cart-count="{{ cart.item_count }}"
+  >
+    {% render 'icon-cart' %}
+    <span class="cart-count"{% if cart.item_count == 0 %} hidden{% endif %} aria-hidden="true">{{ cart.item_count }}</span>
+  </a>
+  <p class="cart-message" aria-live="polite">{{ 'general.cart_empty' | t }}</p>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": []
+}
+{% endschema %}

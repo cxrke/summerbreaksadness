@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "Helvetica Condensed";
-  src: url("../fonts/HelveticaCondensed-Regular.ttf") format("truetype");
+  src: url("HelveticaCondensed-Regular.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -73,29 +73,6 @@ img {
   width: 1.15rem;
   height: 1.15rem;
   display: block;
-}
-
-.currency-selector {
-  position: absolute;
-  right: 4.15rem;
-  top: 50%;
-  transform: translateY(calc(-50% + 1px));
-  width: auto;
-  padding: 0.25rem 0;
-  appearance: none;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: var(--text);
-  font: inherit;
-  font-size: 11px;
-  line-height: 1;
-  text-align: center;
-  cursor: pointer;
-}
-
-.currency-selector:focus {
-  outline: none;
 }
 
 .cart-link {
@@ -172,7 +149,7 @@ img {
   position: relative;
   width: calc(var(--logo-h) * 1.85);
   height: var(--logo-h);
-  background: url("../assets/logo-frames/0.png") center / contain no-repeat;
+  background: url("logo-frame-0.png") center / contain no-repeat;
 }
 
 .logo__frame {
@@ -193,7 +170,7 @@ img {
 }
 
 .home-main {
-  width: min(920px, 100%);
+  width: min(1080px, 100%);
   margin: 0 auto;
   padding: 0.5rem 1.25rem 4rem;
 }
@@ -240,6 +217,12 @@ img {
   margin-top: 0.1rem;
 }
 
+.product-card--polo .product-card__name {
+  position: relative;
+  z-index: 1;
+  margin-top: -0.5rem;
+}
+
 .product-card__price,
 .product-price {
   font-size: 14px;
@@ -251,25 +234,88 @@ img {
 }
 
 .product-page {
-  width: min(1100px, 100%);
+  width: min(1240px, 100%);
   margin: 0 auto;
   padding: 0.5rem 1.25rem 4rem;
 }
 
 .product-layout {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.3fr 0.7fr;
   gap: 2.5rem 3rem;
   align-items: start;
 }
 
 .product-media {
+  min-width: 0;
   background: transparent;
 }
 
 .product-media img {
   width: 100%;
   height: auto;
+}
+
+.product-gallery {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.product-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.product-gallery--multi {
+  cursor: grab;
+}
+
+.product-gallery--multi:active {
+  cursor: grabbing;
+}
+
+.product-gallery__slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.product-gallery__slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.product-gallery__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.product-gallery__dot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #d0d0d0;
+  cursor: pointer;
+}
+
+.product-gallery__dot.is-active {
+  background: var(--text);
 }
 
 .product-info {
@@ -540,6 +586,115 @@ img {
   color: #a00000;
 }
 
+.add-to-cart {
+  width: 100%;
+  min-height: 2.8rem;
+  margin-top: 0.25rem;
+  border: 1px solid var(--text);
+  border-radius: 0;
+  background: var(--text);
+  color: var(--bg);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.add-to-cart:hover,
+.add-to-cart:focus-visible {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.add-to-cart:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.cart-page {
+  width: min(640px, 100%);
+  margin: 0 auto;
+  padding: 0.5rem 1.25rem 4rem;
+}
+
+.cart-page h1 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.cart-empty,
+.cart-continue {
+  font-size: 14px;
+}
+
+.cart-continue {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.cart-list {
+  list-style: none;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.cart-item__info {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 13px;
+}
+
+.cart-item__qty {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-item__qty input {
+  width: 3.5rem;
+  height: 2rem;
+  border: 1px solid var(--text);
+  border-radius: 0;
+  text-align: center;
+  font: inherit;
+}
+
+.cart-footer {
+  margin-top: 2rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.cart-subtotal,
+.checkout-btn {
+  font-size: 13px;
+}
+
+.checkout-btn {
+  min-height: 2.8rem;
+  border: 1px solid var(--text);
+  border-radius: 0;
+  background: var(--text);
+  color: var(--bg);
+  font: inherit;
+  cursor: pointer;
+}
+
+.checkout-btn:hover,
+.checkout-btn:focus-visible {
+  background: var(--bg);
+  color: var(--text);
+}
+
 .stock-honeypot {
   position: absolute;
   left: -10000px;
@@ -691,16 +846,22 @@ img {
     margin-top: 7.25rem;
   }
 
-  .product-card--polo .product-card__name {
-    margin-top: -1.75rem;
-  }
-
   .product-media--hoodie {
     margin-top: -1.25rem;
   }
 
   .product-media--polo {
     margin-top: -3.25rem;
+  }
+
+  .product-gallery__dots {
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .product-gallery__dot {
+    width: 10px;
+    height: 10px;
   }
 }
 
@@ -714,15 +875,11 @@ img {
   }
 
   .cart-link {
-    right: 2.75rem;
-  }
-
-  .currency-selector {
-    right: 5.4rem;
+    right: 0.75rem;
   }
 
   .cart-message {
-    right: 2.75rem;
+    right: 0.75rem;
     top: calc(50% + 1.2rem);
     white-space: normal;
     max-width: 5.75rem;
@@ -736,11 +893,11 @@ img {
   }
 
   .home-main {
-    padding: 1.55rem 1.25rem 0;
+    padding: 1.55rem 0.7rem 0;
   }
 
   .product-page {
-    padding: 1.25rem 1rem 3.5rem;
+    padding: 1.25rem 0.7rem 3.5rem;
   }
 
   .giveaway-page {
@@ -759,19 +916,15 @@ img {
     padding: 0;
   }
 
-  .product-card--polo .product-card__name {
-    margin-top: -1.75rem;
-  }
-
   .product-card__name,
   .product-card__price {
     letter-spacing: 0em;
   }
 
   .product-card__image img {
-    width: 85%;
+    width: 100%;
     height: auto;
-    max-width: 85%;
+    max-width: 100%;
     margin: 0 auto;
   }
 
@@ -781,8 +934,8 @@ img {
   }
 
   .product-media img {
-    width: 82%;
-    max-width: 82%;
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
     display: block;
   }

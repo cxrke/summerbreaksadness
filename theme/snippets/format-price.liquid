@@ -1,0 +1,15 @@
+{%- comment -%}
+  Storefront-only price: currency symbol plus whole units, e.g. $90.
+  Pass price in cents. Independent of Shopify admin money format.
+{%- endcomment -%}
+{%- liquid
+  assign amount = price | plus: 0 | divided_by: 100.0 | round
+  assign symbol = localization.country.currency.symbol
+  if symbol == blank
+    assign symbol = cart.currency.symbol
+  endif
+  if symbol == blank
+    assign symbol = '$'
+  endif
+-%}
+{{- symbol -}}{{- amount -}}

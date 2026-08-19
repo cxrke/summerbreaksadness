@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "home-products",
+      "settings": {
+        "product_limit": 2
+      }
+    }
+  },
+  "order": ["main"]
+}

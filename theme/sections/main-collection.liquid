@@ -1,0 +1,19 @@
+<main class="home-main">
+  <div class="giveaway-intro">
+    <h1>{{ collection.title }}</h1>
+  </div>
+  <div class="product-grid">
+    {%- for product in collection.products -%}
+      {% render 'product-card', product: product %}
+    {%- else -%}
+      <p>{{ 'cart.empty' | t }}</p>
+    {%- endfor -%}
+  </div>
+</main>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": []
+}
+{% endschema %}

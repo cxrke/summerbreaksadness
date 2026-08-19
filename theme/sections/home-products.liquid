@@ -1,0 +1,45 @@
+<main class="home-main">
+  <div class="product-grid">
+    {%- assign home_products = section.settings.collection.products -%}
+    {%- if home_products.size == 0 -%}
+      {%- assign home_products = collections.all.products -%}
+    {%- endif -%}
+
+    {%- if home_products.size > 0 -%}
+      {%- for product in home_products limit: section.settings.product_limit -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    {%- else -%}
+      {%- assign hoodie = all_products['super-max-zip-hoodie'] -%}
+      {%- assign polo = all_products['kimi-polo-shirt'] -%}
+      {%- if hoodie != blank -%}
+        {% render 'product-card', product: hoodie %}
+      {%- endif -%}
+      {%- if polo != blank -%}
+        {% render 'product-card', product: polo %}
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</main>
+
+{% schema %}
+{
+  "name": "Home products",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Number of products",
+      "default": 2
+    }
+  ]
+}
+{% endschema %}

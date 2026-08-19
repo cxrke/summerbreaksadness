@@ -1,0 +1,24 @@
+{%- assign card_class = 'product-card' -%}
+{%- if product.handle == 'kimi-polo-shirt' -%}
+  {%- assign card_class = 'product-card product-card--polo' -%}
+{%- endif -%}
+
+<a class="{{ card_class }}" href="{{ product.url }}">
+  <div class="product-card__image">
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 1600 }}"
+        alt="{{ product.title | escape }}"
+        width="{{ product.featured_image.width }}"
+        height="{{ product.featured_image.height }}"
+        loading="eager"
+      >
+    {%- elsif product.handle == 'super-max-zip-hoodie' -%}
+      <img src="{{ 'home-hoodie.png' | asset_url }}" alt="{{ product.title | escape }}" loading="eager">
+    {%- elsif product.handle == 'kimi-polo-shirt' -%}
+      <img src="{{ 'home-polo.png' | asset_url }}" alt="{{ product.title | escape }}" loading="eager">
+    {%- endif -%}
+  </div>
+  <span class="product-card__name">{{ product.title }}</span>
+  <span class="product-card__price">{% render 'format-price', price: product.price %}</span>
+</a>

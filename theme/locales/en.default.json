@@ -1,0 +1,43 @@
+{
+  "general": {
+    "home": "Home",
+    "cart": "Racing cart",
+    "cart_empty": "Your racing cart is empty",
+    "back": "Back to home"
+  },
+  "product": {
+    "sold_out": "sold out",
+    "add_to_cart": "Add to cart",
+    "adding": "Adding...",
+    "fabric": "100% cotton",
+    "fit": "Women's fit",
+    "size_chart": "Size chart",
+    "size_chart_unit": "(cm)",
+    "restock_label": "Get an email when your size is back in stock",
+    "restock_placeholder": "Email address",
+    "restock_submit": "Remind me",
+    "restock_note": "Select a size, then enter your email.",
+    "restock_note_size": "We'll email you when size {{ size }} is back.",
+    "restock_need_size": "Select a size first.",
+    "restock_success": "You're on the list for size {{ size }}.",
+    "restock_error": "Could not save your email. Please try again."
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your racing cart is empty",
+    "shop": "Continue shopping",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "quantity": "Quantity",
+    "subtotal": "Subtotal"
+  },
+  "404": {
+    "title": "Page not found",
+    "link": "Back home"
+  },
+  "password": {
+    "title": "Opening soon",
+    "password": "Password",
+    "submit": "Enter"
+  }
+}

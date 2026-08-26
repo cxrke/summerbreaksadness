@@ -10,7 +10,8 @@
     "add_to_cart": "Add to cart",
     "adding": "Adding...",
     "fabric": "100% cotton",
-    "fit": "Women's fit",
+    "gender": "Women's boxy oversized fit",
+    "ships": "Ships in 1-2 days",
     "size_chart": "Size chart",
     "size_chart_unit": "(cm)",
     "restock_label": "Get an email when your size is back in stock",
@@ -30,6 +31,9 @@
     "remove": "Remove",
     "quantity": "Quantity",
     "subtotal": "Subtotal"
+  },
+  "footer": {
+    "policies": "Store policies"
   },
   "404": {
     "title": "Page not found",

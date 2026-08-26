@@ -59,7 +59,7 @@
       {%- endif -%}
     </div>
 
-    <div class="product-info">
+    <div class="product-info{% if product.handle == 'super-max-zip-hoodie' %} product-info--hoodie{% endif %}">
       <h1>{{ product.title }}</h1>
       <p class="product-price">{% render 'format-price', price: current_variant.price %}</p>
 
@@ -78,10 +78,11 @@
               {{ variant.title }}
             </button>
           {%- endfor -%}
-          <span class="fabric">
-            {{ product.metafields.custom.fabric | default: '100% cotton' }}
-            <span class="fit">{{ 'product.fit' | t }}</span>
-          </span>
+          {%- unless product.handle == 'super-max-zip-hoodie' -%}
+            <span class="fabric">
+              {{ product.metafields.custom.fabric | default: '100% cotton' }}
+            </span>
+          {%- endunless -%}
         </div>
 
         <p class="status" aria-live="polite"></p>
@@ -89,6 +90,14 @@
           {{ 'product.add_to_cart' | t }}
         </button>
       {% endform %}
+
+      {%- if product.handle == 'super-max-zip-hoodie' -%}
+        <div class="product-details">
+          <p>{{ product.metafields.custom.fabric | default: '100% cotton' }}</p>
+          <p>{{ 'product.gender' | t }}</p>
+          <p>{{ 'product.ships' | t }}</p>
+        </div>
+      {%- endif -%}
 
       {%- assign show_restock_form = false -%}
       {%- assign all_sold_out = true -%}
@@ -103,7 +112,7 @@
 
       {%- if show_restock_form -%}
         <form
-          class="stock-form"
+          class="stock-form{% if product.handle == 'kimi-polo-shirt' %} stock-form--polo{% endif %}"
           action="{{ section.settings.restock_form_action }}"
           method="POST"
           novalidate

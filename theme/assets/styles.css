@@ -27,6 +27,8 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   min-height: 100dvh;
   background: var(--bg);
   color: var(--text);
@@ -334,6 +336,14 @@ img {
   margin-bottom: 2rem;
 }
 
+.product-info--hoodie .product-price {
+  margin-bottom: 1.5rem;
+}
+
+.product-info--hoodie .size-row {
+  margin-bottom: 0;
+}
+
 .size-row {
   display: flex;
   flex-wrap: wrap;
@@ -395,16 +405,10 @@ img {
 }
 
 .fabric {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 1.1rem;
-  gap: 1.1rem;
   font-size: 13px;
   letter-spacing: 0em;
-  color: var(--text);
+  color: var(--muted);
   white-space: nowrap;
-  line-height: 1.35;
 }
 
 .size-chart {
@@ -508,6 +512,10 @@ img {
   margin-top: 0.5rem;
 }
 
+.stock-form--polo {
+  margin-top: 1.15rem;
+}
+
 .stock-form[hidden] {
   display: none;
 }
@@ -589,7 +597,7 @@ img {
 .add-to-cart {
   width: 100%;
   min-height: 2.8rem;
-  margin-top: 0.25rem;
+  margin-top: 1.5rem;
   border: 1px solid var(--text);
   border-radius: 0;
   background: var(--text);
@@ -608,6 +616,18 @@ img {
 .add-to-cart:disabled {
   cursor: wait;
   opacity: 0.55;
+}
+
+.product-details {
+  margin-top: 1.15rem;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.product-details p {
+  margin: 0;
 }
 
 .cart-page {
@@ -841,6 +861,39 @@ img {
   overflow: hidden;
 }
 
+.site-footer {
+  margin-top: auto;
+  padding: 2.25rem 1.25rem 2rem;
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
+  text-align: center;
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.4rem;
+}
+
+.site-footer__links a {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.site-footer__links a:hover,
+.site-footer__links a:focus-visible {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.site-footer__copyright {
+  font-size: 11px;
+  color: var(--sold);
+}
+
 @media (min-width: 761px) {
   .product-card--polo {
     margin-top: 7.25rem;
@@ -955,5 +1008,11 @@ img {
   .size-btn {
     min-width: 2.75rem;
     height: 2.75rem;
+  }
+
+  .fabric {
+    width: 100%;
+    margin-top: 1.1rem;
+    color: var(--text);
   }
 }

@@ -34,31 +34,41 @@
     Thanks — we’ve got your order.
   {% endif %}
 {% endcapture %}
+{%- assign sbs_white_img = 'https://f1spu6-w8.myshopify.com/cdn/shop/t/2/assets/email-white.png' -%}
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" style="color-scheme: light only; background-color:#ffffff;">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="color-scheme: light only; background-color:#fffffe;">
 <head>
   <title>{{ email_title | strip }}</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light only">
+  <!--[if gte mso 9]>
+  <xml>
+    <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+  </xml>
+  <![endif]-->
   <style>
     :root { color-scheme: light only; supported-color-schemes: light only; }
     body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
     table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; }
     img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       width: 100% !important;
-      background-color: #ffffff !important;
+      background-color: #fffffe !important;
       color: #111111 !important;
       font-family: "Arial Narrow", Helvetica, Arial, sans-serif;
+      color-scheme: light only;
     }
     a { color: #111111; text-decoration: none; }
     .sbs-bg {
-      background-color: #ffffff !important;
-      background-image: linear-gradient(#ffffff, #ffffff) !important;
+      background-color: #fffffe !important;
+      background-image: url('{{ sbs_white_img }}') !important;
     }
     .sbs-btn {
       background-color: #111111 !important;
@@ -71,9 +81,9 @@
       .sbs-col + .sbs-col { padding-top: 28px !important; }
     }
     @media (prefers-color-scheme: dark) {
-      body, .sbs-bg, .sbs-bg td {
-        background-color: #ffffff !important;
-        background-image: linear-gradient(#ffffff, #ffffff) !important;
+      html, body, .sbs-bg, .sbs-bg td {
+        background-color: #fffffe !important;
+        background-image: url('{{ sbs_white_img }}') !important;
         color: #111111 !important;
       }
       .sbs-title, .sbs-copy, .sbs-price, .sbs-shop { color: #111111 !important; }
@@ -84,19 +94,48 @@
       }
       .sbs-btn a { color: #ffffff !important; }
     }
+    [data-ogsc] html,
+    [data-ogsc] body,
+    [data-ogsc] .sbs-bg,
+    [data-ogsc] .sbs-bg td,
+    [data-ogsb] html,
+    [data-ogsb] body,
+    [data-ogsb] .sbs-bg,
+    [data-ogsb] .sbs-bg td {
+      background-color: #fffffe !important;
+      background-image: url('{{ sbs_white_img }}') !important;
+      color: #111111 !important;
+    }
+    [data-ogsc] .sbs-title,
+    [data-ogsc] .sbs-copy,
+    [data-ogsc] .sbs-shop,
+    [data-ogsc] .sbs-price,
+    [data-ogsb] .sbs-title,
+    [data-ogsb] .sbs-copy,
+    [data-ogsb] .sbs-shop,
+    [data-ogsb] .sbs-price { color: #111111 !important; }
+    [data-ogsc] .sbs-muted,
+    [data-ogsb] .sbs-muted { color: #777777 !important; }
+    [data-ogsc] .sbs-btn,
+    [data-ogsb] .sbs-btn {
+      background-color: #111111 !important;
+      background-image: linear-gradient(#111111, #111111) !important;
+    }
+    [data-ogsc] .sbs-btn a,
+    [data-ogsb] .sbs-btn a { color: #ffffff !important; }
   </style>
 </head>
 {%- assign logo_width = shop.email_logo_width | default: 160 | plus: 0 -%}
 {%- if logo_width > 180 or logo_width < 40 -%}
   {%- assign logo_width = 160 -%}
 {%- endif -%}
-<body class="sbs-bg" bgcolor="#ffffff" style="margin:0; padding:0; background-color:#ffffff; background-image:linear-gradient(#ffffff,#ffffff); color:#111111; font-family:'Arial Narrow', Helvetica, Arial, sans-serif;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" class="sbs-bg" style="width:100%; background-color:#ffffff; background-image:linear-gradient(#ffffff,#ffffff);">
+<body class="sbs-bg" bgcolor="#fffffe" style="margin:0; padding:0; background-color:#fffffe; background-image:url('{{ sbs_white_img }}'); color:#111111; font-family:'Arial Narrow', Helvetica, Arial, sans-serif; color-scheme:light only;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fffffe" background="{{ sbs_white_img }}" class="sbs-bg" style="width:100%; background-color:#fffffe; background-image:url('{{ sbs_white_img }}');">
     <tr>
-      <td align="center" bgcolor="#ffffff" class="sbs-bg" style="padding:0; text-align:center; background-color:#ffffff; background-image:linear-gradient(#ffffff,#ffffff);">
-        <table role="presentation" width="100%" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" class="sbs-bg" style="width:100%; max-width:560px; margin:0 auto; background-color:#ffffff; background-image:linear-gradient(#ffffff,#ffffff);">
+      <td align="center" bgcolor="#fffffe" background="{{ sbs_white_img }}" class="sbs-bg" style="padding:0; text-align:center; background-color:#fffffe; background-image:url('{{ sbs_white_img }}');">
+        <table role="presentation" width="100%" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#fffffe" background="{{ sbs_white_img }}" class="sbs-bg" style="width:100%; max-width:560px; margin:0 auto; background-color:#fffffe; background-image:url('{{ sbs_white_img }}');">
           <tr>
-            <td class="sbs-pad sbs-bg" bgcolor="#ffffff" align="center" style="padding:48px 40px 56px; text-align:center; background-color:#ffffff; background-image:linear-gradient(#ffffff,#ffffff);">
+            <td class="sbs-pad sbs-bg" bgcolor="#fffffe" background="{{ sbs_white_img }}" align="center" style="padding:48px 40px 56px; text-align:center; background-color:#fffffe; background-image:url('{{ sbs_white_img }}');">
 
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
                 <tr>

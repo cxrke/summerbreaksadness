@@ -1,0 +1,288 @@
+{% comment %}
+  Summer Break Sadness — shipping confirmation
+
+  Subject:
+  On its way
+
+  Paste this whole file into Email body (HTML) for the Shipping confirmation notification.
+  Do not keep Shopify's default stylesheet link.
+{% endcomment %}
+{% capture email_title %}
+  {% if fulfillment.item_count < item_count %}
+    Part of your order is on its way
+  {% else %}
+    On its way
+  {% endif %}
+{% endcapture %}
+{% capture email_body %}
+  {% if fulfillment.item_count < item_count %}
+    These items have shipped. Anything still here will follow.
+  {% else %}
+    It’s left us. You’ll get another email if anything else ships.
+  {% endif %}
+{% endcapture %}
+{%- assign tracking_url = fulfillment.tracking_urls.first | default: fulfillment.tracking_url -%}
+{%- assign tracking_number = fulfillment.tracking_numbers.first | default: fulfillment.tracking_number -%}
+{%- assign sbs_white_img = 'https://f1spu6-w8.myshopify.com/cdn/shop/t/2/assets/email-white.png' -%}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="color-scheme: light only; background-color:#fffffe;">
+<head>
+  <title>{{ email_title | strip }}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light only">
+  <!--[if gte mso 9]>
+  <xml>
+    <o:OfficeDocumentSettings>
+      <o:AllowPNG/>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+  </xml>
+  <![endif]-->
+  <style>
+    :root { color-scheme: light only; supported-color-schemes: light only; }
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; }
+    img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100% !important;
+      background-color: #fffffe !important;
+      color: #111111 !important;
+      font-family: "Arial Narrow", Helvetica, Arial, sans-serif;
+      color-scheme: light only;
+    }
+    a { color: #111111; text-decoration: none; }
+    .sbs-bg {
+      background-color: #fffffe !important;
+      background-image: url('{{ sbs_white_img }}') !important;
+    }
+    .sbs-btn {
+      background-color: #111111 !important;
+      background-image: linear-gradient(#111111, #111111) !important;
+    }
+    .sbs-btn a { color: #ffffff !important; text-decoration: none; }
+    @media only screen and (max-width: 620px) {
+      .sbs-pad { padding-left: 20px !important; padding-right: 20px !important; }
+      .sbs-col { display: block !important; width: 100% !important; }
+      .sbs-col + .sbs-col { padding-top: 28px !important; }
+    }
+    @media (prefers-color-scheme: dark) {
+      html, body, .sbs-bg, .sbs-bg td {
+        background-color: #fffffe !important;
+        background-image: url('{{ sbs_white_img }}') !important;
+        color: #111111 !important;
+      }
+      .sbs-title, .sbs-copy, .sbs-price, .sbs-shop { color: #111111 !important; }
+      .sbs-muted { color: #777777 !important; }
+      .sbs-btn {
+        background-color: #111111 !important;
+        background-image: linear-gradient(#111111, #111111) !important;
+      }
+      .sbs-btn a { color: #ffffff !important; }
+    }
+    [data-ogsc] html,
+    [data-ogsc] body,
+    [data-ogsc] .sbs-bg,
+    [data-ogsc] .sbs-bg td,
+    [data-ogsb] html,
+    [data-ogsb] body,
+    [data-ogsb] .sbs-bg,
+    [data-ogsb] .sbs-bg td {
+      background-color: #fffffe !important;
+      background-image: url('{{ sbs_white_img }}') !important;
+      color: #111111 !important;
+    }
+    [data-ogsc] .sbs-title,
+    [data-ogsc] .sbs-copy,
+    [data-ogsc] .sbs-shop,
+    [data-ogsc] .sbs-price,
+    [data-ogsb] .sbs-title,
+    [data-ogsb] .sbs-copy,
+    [data-ogsb] .sbs-shop,
+    [data-ogsb] .sbs-price { color: #111111 !important; }
+    [data-ogsc] .sbs-muted,
+    [data-ogsb] .sbs-muted { color: #777777 !important; }
+    [data-ogsc] .sbs-btn,
+    [data-ogsb] .sbs-btn {
+      background-color: #111111 !important;
+      background-image: linear-gradient(#111111, #111111) !important;
+    }
+    [data-ogsc] .sbs-btn a,
+    [data-ogsb] .sbs-btn a { color: #ffffff !important; }
+  </style>
+</head>
+{%- assign logo_width = shop.email_logo_width | default: 160 | plus: 0 -%}
+{%- if logo_width > 180 or logo_width < 40 -%}
+  {%- assign logo_width = 160 -%}
+{%- endif -%}
+<body class="sbs-bg" bgcolor="#fffffe" style="margin:0; padding:0; background-color:#fffffe; background-image:url('{{ sbs_white_img }}'); color:#111111; font-family:'Arial Narrow', Helvetica, Arial, sans-serif; color-scheme:light only;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#fffffe" background="{{ sbs_white_img }}" class="sbs-bg" style="width:100%; background-color:#fffffe; background-image:url('{{ sbs_white_img }}');">
+    <tr>
+      <td align="center" bgcolor="#fffffe" background="{{ sbs_white_img }}" class="sbs-bg" style="padding:0; text-align:center; background-color:#fffffe; background-image:url('{{ sbs_white_img }}');">
+        <table role="presentation" width="100%" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#fffffe" background="{{ sbs_white_img }}" class="sbs-bg" style="width:100%; max-width:560px; margin:0 auto; background-color:#fffffe; background-image:url('{{ sbs_white_img }}');">
+          <tr>
+            <td class="sbs-pad sbs-bg" bgcolor="#fffffe" background="{{ sbs_white_img }}" align="center" style="padding:48px 40px 56px; text-align:center; background-color:#fffffe; background-image:url('{{ sbs_white_img }}');">
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+                <tr>
+                  <td align="center" style="padding:0 0 28px; text-align:center;">
+                    {%- if shop.email_logo_url %}
+                      <center>
+                        <a href="{{ shop.url }}" target="_blank" style="display:inline-block; text-decoration:none;">
+                          <img src="{{ shop.email_logo_url }}" alt="{{ shop.name | escape }}" width="{{ logo_width }}" align="center" style="display:block; margin:0 auto; width:{{ logo_width }}px; max-width:180px; height:auto; border:0;">
+                        </a>
+                      </center>
+                    {%- else %}
+                      <center>
+                        <a href="{{ shop.url }}" target="_blank" style="display:inline-block; text-decoration:none; color:#111111;">
+                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 14px;">
+                            <tr>
+                              <td style="padding:0 7px;"><div style="width:12px; height:12px; background:#ff0000; border-radius:12px; line-height:12px; font-size:0;">&nbsp;</div></td>
+                              <td style="padding:0 7px;"><div style="width:12px; height:12px; background:#ff0000; border-radius:12px; line-height:12px; font-size:0;">&nbsp;</div></td>
+                              <td style="padding:0 7px;"><div style="width:12px; height:12px; background:#ff0000; border-radius:12px; line-height:12px; font-size:0;">&nbsp;</div></td>
+                              <td style="padding:0 7px;"><div style="width:12px; height:12px; background:#ff0000; border-radius:12px; line-height:12px; font-size:0;">&nbsp;</div></td>
+                              <td style="padding:0 7px;"><div style="width:12px; height:12px; background:#ff0000; border-radius:12px; line-height:12px; font-size:0;">&nbsp;</div></td>
+                            </tr>
+                          </table>
+                          <div class="sbs-shop" style="font-size:13px; line-height:1; letter-spacing:0.02em; color:#111111;">{{ shop.name }}</div>
+                        </a>
+                      </center>
+                    {%- endif %}
+                  </td>
+                </tr>
+              </table>
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" style="padding:0 0 36px; text-align:center;">
+                    <div class="sbs-title" style="font-size:16px; font-weight:500; line-height:1.1; letter-spacing:0.01em; color:#111111; padding-bottom:18px;">{{ email_title | strip }}</div>
+                    {% if customer.first_name != blank %}
+                      <div class="sbs-copy" style="font-size:14px; line-height:1.35; color:#111111; padding-bottom:8px;">Hi {{ customer.first_name }}.</div>
+                    {% endif %}
+                    <div class="sbs-copy" style="font-size:14px; line-height:1.35; color:#111111; max-width:26em; margin:0 auto;">{{ email_body | strip }}</div>
+                    {% if fulfillment.estimated_delivery_at %}
+                      <div class="sbs-muted" style="font-size:13px; line-height:1.35; color:#777777; padding-top:10px;">Estimated delivery {{ fulfillment.estimated_delivery_at | date: "%d %b %Y" }}</div>
+                    {% elsif consolidated_estimated_delivery_time %}
+                      <div class="sbs-muted" style="font-size:13px; line-height:1.35; color:#777777; padding-top:10px;">Estimated delivery {{ consolidated_estimated_delivery_time }}</div>
+                    {% endif %}
+                    {% if tracking_number != blank %}
+                      <div class="sbs-muted" style="font-size:13px; line-height:1.35; color:#777777; padding-top:10px;">
+                        {% if fulfillment.tracking_company != blank %}{{ fulfillment.tracking_company }} · {% endif %}{{ tracking_number }}
+                      </div>
+                    {% endif %}
+                  </td>
+                </tr>
+              </table>
+
+              {% if tracking_url != blank %}
+                <center>
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 44px;">
+                  <tr>
+                    <td class="sbs-btn" align="center" bgcolor="#111111" style="background-color:#111111; background-image:linear-gradient(#111111,#111111); border:1px solid #111111;">
+                      <a href="{{ tracking_url }}" target="_blank" style="display:inline-block; padding:14px 28px; font-size:12px; line-height:1; color:#ffffff; text-decoration:none; letter-spacing:0.02em;">
+                        Track shipment
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+                </center>
+              {% elsif order_status_url %}
+                <center>
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 44px;">
+                  <tr>
+                    <td class="sbs-btn" align="center" bgcolor="#111111" style="background-color:#111111; background-image:linear-gradient(#111111,#111111); border:1px solid #111111;">
+                      <a href="{{ order_status_url }}" target="_blank" style="display:inline-block; padding:14px 28px; font-size:12px; line-height:1; color:#ffffff; text-decoration:none; letter-spacing:0.02em;">
+                        View order
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+                </center>
+              {% endif %}
+
+              {% assign shipped_items = fulfillment.fulfillment_line_items %}
+              {% if shipped_items == blank %}
+                {% assign shipped_items = line_items %}
+              {% endif %}
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                {% for fulfillment_line in shipped_items %}
+                  {% if fulfillment_line.line_item %}
+                    {% assign line = fulfillment_line.line_item %}
+                    {% assign line_qty = fulfillment_line.quantity %}
+                  {% else %}
+                    {% assign line = fulfillment_line %}
+                    {% assign line_qty = fulfillment_line.quantity %}
+                  {% endif %}
+                  {% if line.product.title %}
+                    {% assign line_title = line.product.title %}
+                  {% else %}
+                    {% assign line_title = line.title %}
+                  {% endif %}
+                  <tr>
+                    <td style="padding:16px 0; border-top:1px solid #e5e5e5;{% if forloop.last %} border-bottom:1px solid #e5e5e5;{% endif %}">
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td width="72" valign="top" style="width:72px; padding-right:16px;">
+                            {% if line.image %}
+                              <img src="{{ line | img_url: '144x' }}" alt="{{ line_title | escape }}" width="72" style="width:72px; height:auto;">
+                            {% endif %}
+                          </td>
+                          <td valign="top" style="font-size:13px; line-height:1.25; color:#111111;">
+                            <div class="sbs-copy" style="font-weight:500; padding-bottom:4px; color:#111111;">{{ line_title }}</div>
+                            {% if line.variant.title != blank and line.variant.title != 'Default Title' %}
+                              <div class="sbs-muted" style="color:#777777; padding-bottom:2px;">{{ line.variant.title }}</div>
+                            {% endif %}
+                            <div class="sbs-muted" style="color:#777777;">Qty {{ line_qty }}</div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </table>
+
+              {% if shipping_address %}
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:44px;">
+                  <tr>
+                    <td align="center" valign="top" style="font-size:13px; line-height:1.4; color:#111111; text-align:center;">
+                      <div class="sbs-muted" style="font-size:12px; color:#777777; padding-bottom:8px;">Shipping to</div>
+                      <div class="sbs-copy" style="color:#111111;">{{ shipping_address | format_address }}</div>
+                      {% if shipping_method %}
+                        <div class="sbs-muted" style="padding-top:10px; color:#777777;">{{ shipping_method.title }}</div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                </table>
+              {% endif %}
+
+              {% if order_status_url and tracking_url != blank %}
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:28px;">
+                  <tr>
+                    <td align="center" style="text-align:center;">
+                      <a href="{{ order_status_url }}" target="_blank" class="sbs-muted" style="font-size:12px; color:#777777; text-decoration:underline; text-underline-offset:0.2rem;">View order</a>
+                    </td>
+                  </tr>
+                </table>
+              {% endif %}
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:52px;">
+                <tr>
+                  <td align="center" class="sbs-muted" style="font-size:12px; line-height:1.45; color:#777777; text-align:center;">
+                    Questions — reply to this email{% if shop.email %} or write to <a href="mailto:{{ shop.email }}" style="color:#111111; text-decoration:none;">{{ shop.email }}</a>{% endif %}.
+                    <div class="sbs-shop" style="padding-top:18px; color:#111111;">{{ shop.name }}</div>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<footer class="site-footer">
+  <nav class="site-footer__links" aria-label="{{ 'footer.policies' | t }}">
+    {%- for policy in shop.policies -%}
+      {%- if policy != blank and policy.body != blank -%}
+        <a href="{{ policy.url }}">{{ policy.title }}</a>
+      {%- endif -%}
+    {%- endfor -%}
+  </nav>
+
+  <p class="site-footer__copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}
